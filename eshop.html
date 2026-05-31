@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-shop | MIROSLAV ŠEBESTA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --wood-dark: #2a1810;
+      --wood-medium: #4a3728;
+      --wood-light: #8b6914;
+      --forest: #1e3a2f;
+      --cream: #f5f0e8;
+      --cream-warm: #e8e0d0;
+      --leaf: #5a7a5e;
+      --accent: #c4a35a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--cream);
+      color: var(--wood-dark);
+      line-height: 1.7;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--cream-warm);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--wood-medium);
+      border-radius: 4px;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      z-index: 9999;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      background: rgba(245, 240, 232, 0.95);
+      backdrop-filter: blur(10px);
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: var(--wood-dark);
+      text-decoration: none;
+    }
+
+    .logo img {
+      height: 40px;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--wood-medium);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--wood-dark);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      padding: 10rem 4rem 5rem;
+      background: 
+        radial-gradient(ellipse at 20% 80%, rgba(90, 122, 94, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(139, 105, 20, 0.08) 0%, transparent 50%),
+        linear-gradient(180deg, var(--cream-warm) 0%, var(--cream) 100%);
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      right: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: clamp(200px, 25vw, 350px);
+      height: clamp(200px, 25vw, 350px);
+      background: radial-gradient(circle, rgba(90, 122, 94, 0.15) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.8; }
+      50% { transform: translateY(-50%) scale(1.1); opacity: 0.5; }
+    }
+
+    /* Tree visualization */
+    .tree-viz {
+      position: absolute;
+      right: 8%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: clamp(150px, 20vw, 250px);
+      height: clamp(150px, 20vw, 250px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: treeFloat 6s ease-in-out infinite;
+    }
+
+    .tree-viz .ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid var(--wood-medium);
+      opacity: 0.15;
+    }
+
+    .tree-viz .ring:nth-child(1) { width: 100%; height: 100%; opacity: 0.1; }
+    .tree-viz .ring:nth-child(2) { width: 80%; height: 80%; opacity: 0.15; }
+    .tree-viz .ring:nth-child(3) { width: 60%; height: 60%; opacity: 0.2; }
+    .tree-viz .ring:nth-child(4) { width: 40%; height: 40%; opacity: 0.25; }
+    .tree-viz .ring:nth-child(5) { width: 20%; height: 20%; background: var(--wood-medium); opacity: 0.3; }
+
+    .tree-viz .leaves {
+      position: absolute;
+      width: 70%;
+      height: 70%;
+      background: radial-gradient(ellipse at center, rgba(90, 122, 94, 0.12) 0%, transparent 70%);
+      animation: leavesSway 8s ease-in-out infinite;
+    }
+
+    @keyframes treeFloat {
+      0%, 100% { transform: translateY(-50%) rotate(0deg); }
+      50% { transform: translateY(calc(-50% - 10px)) rotate(2deg); }
+    }
+
+    @keyframes leavesSway {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.05) rotate(3deg); }
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero p {
+      color: var(--wood-medium);
+      max-width: 600px;
+      font-weight: 300;
+    }
+
+    /* Products List */
+    .products {
+      padding: 5rem 4rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .product-item {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 4rem;
+      padding: 3rem 0;
+      border-bottom: 1px solid rgba(42, 24, 16, 0.1);
+      align-items: center;
+    }
+
+    .product-item:last-child {
+      border-bottom: none;
+    }
+
+    .product-item img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border-radius: 4px;
+      box-shadow: 0 15px 35px rgba(42, 24, 16, 0.15);
+      transition: transform 0.4s;
+    }
+
+    .product-item:hover img {
+      transform: translateY(-5px);
+    }
+
+    .product-info {
+      padding: 1rem 0;
+    }
+
+    .product-info .label {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--leaf);
+      margin-bottom: 0.5rem;
+    }
+
+    .product-info h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+
+    .product-info .description {
+      color: var(--wood-medium);
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+
+    .product-info .price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      color: var(--wood-dark);
+      margin-bottom: 1.5rem;
+    }
+
+    .product-info .details {
+      font-size: 0.85rem;
+      color: var(--wood-medium);
+      margin-bottom: 0.5rem;
+    }
+
+    .product-info .cta {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      background: var(--wood-dark);
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      margin-top: 1rem;
+    }
+
+    .product-info .cta:hover {
+      background: var(--forest);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      padding: 3rem 4rem;
+      background: var(--wood-dark);
+      color: rgba(245, 240, 232, 0.4);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(245, 240, 232, 0.08);
+    }
+
+    footer p {
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .social-links a {
+      color: rgba(245, 240, 232, 0.4);
+      transition: color 0.3s;
+    }
+
+    .social-links a:hover {
+      color: var(--accent);
+    }
+
+    .social-links svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 2rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 8rem 2rem 4rem;
+      }
+
+      .products {
+        padding: 3rem 2rem;
+      }
+
+      .product-item {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .product-item img {
+        max-width: 280px;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html" class="logo">
+      <img src="assets/logo1.jpg" alt="Miroslav Šebesta" style="height:40px;object-fit:contain;">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">O mně</a></li>
+      <li><a href="index.html#work">Práce</a></li>
+      <li><a href="index.html#služby">Služby</a></li>
+      <li><a href="eshop.html">E-shop</a></li>
+      <li><a href="index.html#kontakt">Kontakt</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <!-- Tree visualization -->
+    <div class="tree-viz">
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="leaves"></div>
+    </div>
+    
+    <h1>E-shop</h1>
+    <p>
+      Ručně vyráběné kousky z masivního dřeva. 
+      Každý výrobek je originál – proto jsou všechny kusy limitované.
+    </p>
+  </section>
+
+  <!-- Products List -->
+  <section class="products">
+    
+    <!-- Product 1: Stoolička -->
+    <div class="product-item">
+      <img src="assets/work-5.jpg" alt="Dubová stolička">
+      <div class="product-info">
+        <p class="label">Nábytek</p>
+        <h2>Dubová stolička</h2>
+        <p class="description">
+          Minimalistická třínohá stolička z masivního dubu. 
+          Jednoduchá konstrukce s tradičními tesařskými spoji. 
+          Vhodná jako odkládací stolek nebo přídavné sedátko.
+        </p>
+        <p class="price">2 800 Kč</p>
+        <p class="details">Materiál: dub | Rozměry: ⌀35 × 45 cm | Limitka: 5 ks</p>
+        <a href="mailto:sebwood@email.cz?subject=Stolička - poptávka" class="cta">Objednat</a>
+      </div>
+    </div>
+
+    <!-- Product 2: Barový stolek -->
+    <div class="product-item">
+      <img src="assets/work-2.jpg" alt="Barový stolek">
+      <div class="product-info">
+        <p class="label">Nábytek</p>
+        <h2>Barový stolek</h2>
+        <p class="description">
+          Vysoký barový stolek s masivní centrální nohou. 
+          Stabilní křížová podstava. 
+          Ideální do kuchyně, jídelny nebo vináren.
+        </p>
+        <p class="price">5 900 Kč</p>
+        <p class="details">Materiál: dub | Výška: 105 cm | Limitka: 3 ks</p>
+        <a href="mailto:sebwood@email.cz?subject=Barový stolek - poptávka" class="cta">Objednat</a>
+      </div>
+    </div>
+
+    <!-- Product 3: Odkládací stolky C -->
+    <div class="product-item">
+      <img src="assets/work-1.jpg" alt="Odkládací stolky C">
+      <div class="product-info">
+        <p class="label">Nábytek</p>
+        <h2>Odkládací stolky C</h2>
+        <p class="description">
+          pár odkládacích stolků ve tvaru písmene C. 
+          Ručně vyrobené s rybinovými spoji jako dekorativním prvkem. 
+          Skvělé jako boční stolky k sedací soupravě.
+        </p>
+        <p class="price">4 500 Kč / pár</p>
+        <p class="details">Materiál: dub | Rozměry: 40 × 40 × 50 cm | Limitka: 2 páry</p>
+        <a href="mailto:sebwood@email.cz?subject=Stolky C - poptávka" class="cta">Objednat</a>
+      </div>
+    </div>
+
+    <!-- Product 4: Venkovní stůl -->
+    <div class="product-item">
+      <img src="assets/work-4.jpg" alt="Venkovní stůl">
+      <div class="product-info">
+        <p class="label">Exteriér</p>
+        <h2>Venkovní stůl</h2>
+        <p class="description">
+          Robustní venkovní stůl z masivního dubu. 
+          Odolný vůči povětrnostním podmínkám. 
+          Ideální na terasu nebo zahradu.
+        </p>
+        <p class="price">8 900 Kč</p>
+        <p class="details">Materiál: dub | Rozměry: 160 × 80 × 75 cm | Limitka: 2 ks</p>
+        <a href="mailto:sebwood@email.cz?subject=Venkovní stůl - poptávka" class="cta">Objednat</a>
+      </div>
+    </div>
+
+    <!-- Product 5: Surfboard -->
+    <div class="product-item">
+      <img src="assets/work-8.jpg" alt="Surfboard">
+      <div class="product-info">
+        <p class="label">Design</p>
+        <h2>Surfboard</h2>
+        <p class="description">
+          Ručně vyrobený surfboard z masivního dřeva. 
+          Unikátní designový kousek – funkční a zároveň dekorativní. 
+          Skvělý jako nástěnná dekorace nebo designový prvek.
+        </p>
+        <p class="price">6 500 Kč</p>
+        <p class="details">Materiál: smrk/jasan | Délka: 210 cm | Limitka: 1 ks</p>
+        <a href="mailto:sebwood@email.cz?subject=Surfboard - poptávka" class="cta">Objednat</a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Miroslav Šebesta. Všechna práva vyhrazena.</p>
+    <div class="social-links">
+      <a href="https://www.instagram.com/mir_sebwood/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="2" y="2" width="20" height="20" rx="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="18" cy="6" r="1" fill="currentColor"/>
+        </svg>
+      </a>
+      <a href="https://www.facebook.com/mirek.sebesta.39/" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4H10V7a1 1 0 0 1 1-1h3V2z"/>
+        </svg>
+      </a>
+    </div>
+  </footer>
+</body>
+</html>
