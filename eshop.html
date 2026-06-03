@@ -3,513 +3,552 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>E-shop | MIROSLAV ŠEBESTA</title>
+  
+  <!-- Primary SEO Meta Tags -->
+  <title>Katalog nábytku z masivu | Miroslav Šebesta</title>
+  <meta name="description" content="Prohlédněte si ručně vyráběný nábytek z českého dubu a jasanu. Limitovaná edice stolů, knihoven, stoliček a skříněk z dílny Miroslava Šebesty v Dolních Dunajovicích.">
+  <meta name="keywords" content="katalog nábytku, dubový stůl, jasanová knihovna, dubová stolička, nábytek na zakázku, truhlářství Jižní Morava">
+
+  <!-- Fonts & Stylesheets -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --wood-dark: #2a1810;
-      --wood-medium: #4a3728;
-      --wood-light: #8b6914;
-      --forest: #1e3a2f;
-      --cream: #f5f0e8;
-      --cream-warm: #e8e0d0;
-      --leaf: #5a7a5e;
-      --accent: #c4a35a;
-    }
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Outfit', sans-serif;
-      background: var(--cream);
-      color: var(--wood-dark);
-      line-height: 1.7;
-    }
-
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: var(--cream-warm);
-    }
-    ::-webkit-scrollbar-thumb {
-      background: var(--wood-medium);
-      border-radius: 4px;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      opacity: 0.03;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      z-index: 9999;
-    }
-
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      padding: 1.5rem 4rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 1000;
-      background: rgba(245, 240, 232, 0.95);
-      backdrop-filter: blur(10px);
-    }
-
-    .logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem;
-      font-weight: 400;
-      letter-spacing: 0.2em;
-      color: var(--wood-dark);
-      text-decoration: none;
-    }
-
-    .logo img {
-      height: 40px;
-      object-fit: contain;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 3rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--wood-medium);
-      text-decoration: none;
-      font-size: 0.85rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      position: relative;
-      transition: color 0.3s;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--accent);
-      transition: width 0.3s;
-    }
-
-    .nav-links a:hover {
-      color: var(--wood-dark);
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    /* Hero */
-    .hero {
-      position: relative;
-      padding: 10rem 4rem 5rem;
-      background: 
-        radial-gradient(ellipse at 20% 80%, rgba(90, 122, 94, 0.12) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(139, 105, 20, 0.08) 0%, transparent 50%),
-        linear-gradient(180deg, var(--cream-warm) 0%, var(--cream) 100%);
-      overflow: hidden;
-    }
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      right: 5%;
-      top: 50%;
-      transform: translateY(-50%);
-      width: clamp(200px, 25vw, 350px);
-      height: clamp(200px, 25vw, 350px);
-      background: radial-gradient(circle, rgba(90, 122, 94, 0.15) 0%, transparent 70%);
-      border-radius: 50%;
-      animation: pulse 4s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.8; }
-      50% { transform: translateY(-50%) scale(1.1); opacity: 0.5; }
-    }
-
-    /* Tree visualization */
-    .tree-viz {
-      position: absolute;
-      right: 8%;
-      top: 50%;
-      transform: translateY(-50%);
-      width: clamp(150px, 20vw, 250px);
-      height: clamp(150px, 20vw, 250px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: treeFloat 6s ease-in-out infinite;
-    }
-
-    .tree-viz .ring {
-      position: absolute;
-      border-radius: 50%;
-      border: 1px solid var(--wood-medium);
-      opacity: 0.15;
-    }
-
-    .tree-viz .ring:nth-child(1) { width: 100%; height: 100%; opacity: 0.1; }
-    .tree-viz .ring:nth-child(2) { width: 80%; height: 80%; opacity: 0.15; }
-    .tree-viz .ring:nth-child(3) { width: 60%; height: 60%; opacity: 0.2; }
-    .tree-viz .ring:nth-child(4) { width: 40%; height: 40%; opacity: 0.25; }
-    .tree-viz .ring:nth-child(5) { width: 20%; height: 20%; background: var(--wood-medium); opacity: 0.3; }
-
-    .tree-viz .leaves {
-      position: absolute;
-      width: 70%;
-      height: 70%;
-      background: radial-gradient(ellipse at center, rgba(90, 122, 94, 0.12) 0%, transparent 70%);
-      animation: leavesSway 8s ease-in-out infinite;
-    }
-
-    @keyframes treeFloat {
-      0%, 100% { transform: translateY(-50%) rotate(0deg); }
-      50% { transform: translateY(calc(-50% - 10px)) rotate(2deg); }
-    }
-
-    @keyframes leavesSway {
-      0%, 100% { transform: scale(1) rotate(0deg); }
-      50% { transform: scale(1.05) rotate(3deg); }
-    }
-
-    .hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 300;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero p {
-      color: var(--wood-medium);
-      max-width: 600px;
-      font-weight: 300;
-    }
-
-    /* Products List */
-    .products {
-      padding: 5rem 4rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .product-item {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 4rem;
-      padding: 3rem 0;
-      border-bottom: 1px solid rgba(42, 24, 16, 0.1);
-      align-items: center;
-    }
-
-    .product-item:last-child {
-      border-bottom: none;
-    }
-
-    .product-item img {
-      width: 100%;
-      aspect-ratio: 4/5;
-      object-fit: cover;
-      border-radius: 4px;
-      box-shadow: 0 15px 35px rgba(42, 24, 16, 0.15);
-      transition: transform 0.4s;
-    }
-
-    .product-item:hover img {
-      transform: translateY(-5px);
-    }
-
-    .product-info {
-      padding: 1rem 0;
-    }
-
-    .product-info .label {
-      font-size: 0.7rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--leaf);
-      margin-bottom: 0.5rem;
-    }
-
-    .product-info h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.8rem;
-      font-weight: 400;
-      margin-bottom: 1rem;
-    }
-
-    .product-info .description {
-      color: var(--wood-medium);
-      font-weight: 300;
-      margin-bottom: 1.5rem;
-    }
-
-    .product-info .price {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem;
-      color: var(--wood-dark);
-      margin-bottom: 1.5rem;
-    }
-
-    .product-info .details {
-      font-size: 0.85rem;
-      color: var(--wood-medium);
-      margin-bottom: 0.5rem;
-    }
-
-    .product-info .cta {
-      display: inline-block;
-      padding: 0.75rem 2rem;
-      background: var(--wood-dark);
-      color: var(--cream);
-      text-decoration: none;
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      transition: all 0.3s;
-      margin-top: 1rem;
-    }
-
-    .product-info .cta:hover {
-      background: var(--forest);
-      transform: translateY(-2px);
-    }
-
-    /* Footer */
-    footer {
-      padding: 3rem 4rem;
-      background: var(--wood-dark);
-      color: rgba(245, 240, 232, 0.4);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: 1px solid rgba(245, 240, 232, 0.08);
-    }
-
-    footer p {
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    .social-links a {
-      color: rgba(245, 240, 232, 0.4);
-      transition: color 0.3s;
-    }
-
-    .social-links a:hover {
-      color: var(--accent);
-    }
-
-    .social-links svg {
-      width: 20px;
-      height: 20px;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      nav {
-        padding: 1rem 2rem;
+  <!-- Schema.org JSON-LD Structured Data (Products & Breadcrumbs) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://ms-furniture.cz/eshop.html#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Domů",
+            "item": "https://ms-furniture.cz/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Katalog",
+            "item": "https://ms-furniture.cz/eshop.html"
+          }
+        ]
+      },
+      {
+        "@type": "Product",
+        "@id": "https://ms-furniture.cz/eshop.html#product-stul-jidelni",
+        "name": "Dubový jídelní stůl",
+        "image": "https://ms-furniture.cz/assets/work-3.jpg",
+        "description": "Robustní jídelní stůl z jednoho kusu dřeva. Tradiční tesařské spoje bez použití kovových prvků zaručují stabilitu na staletí.",
+        "brand": {
+          "@type": "Brand",
+          "name": "Miroslav Šebesta"
+        },
+        "material": "český dub",
+        "offers": {
+          "@type": "Offer",
+          "price": "34000",
+          "priceCurrency": "CZK",
+          "availability": "https://schema.org/PreOrder",
+          "url": "https://ms-furniture.cz/eshop.html"
+        }
+      },
+      {
+        "@type": "Product",
+        "@id": "https://ms-furniture.cz/eshop.html#product-stul-barovy",
+        "name": "Barový stolek z masivu",
+        "image": "https://ms-furniture.cz/assets/work-2.jpg",
+        "description": "Vysoký barový stolek s masivní centrální nohou a křížovou podstavou. Ideální do vinoték i moderních kuchyní.",
+        "brand": {
+          "@type": "Brand",
+          "name": "Miroslav Šebesta"
+        },
+        "material": "český dub",
+        "offers": {
+          "@type": "Offer",
+          "price": "5900",
+          "priceCurrency": "CZK",
+          "availability": "https://schema.org/InStock",
+          "url": "https://ms-furniture.cz/eshop.html"
+        }
+      },
+      {
+        "@type": "Product",
+        "@id": "https://ms-furniture.cz/eshop.html#product-stolky-c",
+        "name": "Odkládací stolky C",
+        "image": "https://ms-furniture.cz/assets/work-1.jpg",
+        "description": "Pár designových stolků ve tvaru písmene C. Rybinové rosové spoje plní konstrukční i dekorativní roli.",
+        "brand": {
+          "@type": "Brand",
+          "name": "Miroslav Šebesta"
+        },
+        "material": "český dub",
+        "offers": {
+          "@type": "Offer",
+          "price": "4500",
+          "priceCurrency": "CZK",
+          "availability": "https://schema.org/InStock",
+          "url": "https://ms-furniture.cz/eshop.html"
+        }
+      },
+      {
+        "@type": "Product",
+        "@id": "https://ms-furniture.cz/eshop.html#product-stul-venkovni",
+        "name": "Robustní venkovní stůl",
+        "image": "https://ms-furniture.cz/assets/work-4.jpg",
+        "description": "Zahradní stůl odolný povětrnostním vlivům. Ošetřen hloubkovými přírodními oleji s voskem.",
+        "brand": {
+          "@type": "Brand",
+          "name": "Miroslav Šebesta"
+        },
+        "material": "český dub",
+        "offers": {
+          "@type": "Offer",
+          "price": "8900",
+          "priceCurrency": "CZK",
+          "availability": "https://schema.org/PreOrder",
+          "url": "https://ms-furniture.cz/eshop.html"
+        }
+      },
+      {
+        "@type": "Product",
+        "@id": "https://ms-furniture.cz/eshop.html#product-knihovna-jasan",
+        "name": "Jasanová knihovna na míru",
+        "image": "https://ms-furniture.cz/assets/work-9.jpg",
+        "description": "Velkorysá vzdušná knihovna z masivního jasanu. Tradiční čepování a posuvné police.",
+        "brand": {
+          "@type": "Brand",
+          "name": "Miroslav Šebesta"
+        },
+        "material": "český jasan",
+        "offers": {
+          "@type": "Offer",
+          "price": "18500",
+          "priceCurrency": "CZK",
+          "availability": "https://schema.org/PreOrder",
+          "url": "https://ms-furniture.cz/eshop.html"
+        }
+      },
+      {
+        "@type": "Product",
+        "@id": "https://ms-furniture.cz/eshop.html#product-stolicka-dub",
+        "name": "Dubová stolička",
+        "image": "https://ms-furniture.cz/assets/work-5.jpg",
+        "description": "Minimalistická třínohá stolička z masivu s klínovanými spoji, které procházejí skrz sedák.",
+        "brand": {
+          "@type": "Brand",
+          "name": "Miroslav Šebesta"
+        },
+        "material": "český dub",
+        "offers": {
+          "@type": "Offer",
+          "price": "2800",
+          "priceCurrency": "CZK",
+          "availability": "https://schema.org/InStock",
+          "url": "https://ms-furniture.cz/eshop.html"
+        }
+      },
+      {
+        "@type": "Product",
+        "@id": "https://ms-furniture.cz/eshop.html#product-komoda-cepy",
+        "name": "Komoda / Skříňka s čepy",
+        "image": "https://ms-furniture.cz/assets/work-6.jpg",
+        "description": "Skříňka s tesařskými detaily, které oslavují čistotu spojení dřeva na dřevo. Ručně broušená a napuštěná lněným olejem.",
+        "brand": {
+          "@type": "Brand",
+          "name": "Miroslav Šebesta"
+        },
+        "material": "český dub",
+        "offers": {
+          "@type": "Offer",
+          "price": "12500",
+          "priceCurrency": "CZK",
+          "availability": "https://schema.org/PreOrder",
+          "url": "https://ms-furniture.cz/eshop.html"
+        }
+      },
+      {
+        "@type": "Product",
+        "@id": "https://ms-furniture.cz/eshop.html#product-surfboard",
+        "name": "Dřevěný surfboard",
+        "image": "https://ms-furniture.cz/assets/work-8.jpg",
+        "description": "Autorský dekorativní a plně funkční surfboard z masivního českého smrku a jasanu. Exkluzivní interiérový solitér.",
+        "brand": {
+          "@type": "Brand",
+          "name": "Miroslav Šebesta"
+        },
+        "material": "český smrk, český jasan",
+        "offers": {
+          "@type": "Offer",
+          "price": "6500",
+          "priceCurrency": "CZK",
+          "availability": "https://schema.org/InStock",
+          "url": "https://ms-furniture.cz/eshop.html"
+        }
       }
-
-      .nav-links {
-        display: none;
-      }
-
-      .hero {
-        padding: 8rem 2rem 4rem;
-      }
-
-      .products {
-        padding: 3rem 2rem;
-      }
-
-      .product-item {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-
-      .product-item img {
-        max-width: 280px;
-      }
-
-      footer {
-        flex-direction: column;
-        gap: 1.5rem;
-        text-align: center;
-      }
-    }
-  </style>
+    ]
+  }
+  </script>
 </head>
 <body>
+
   <!-- Navigation -->
-  <nav>
-    <a href="index.html" class="logo">
-      <img src="assets/logo1.jpg" alt="Miroslav Šebesta" style="height:40px;object-fit:contain;">
-    </a>
+  <nav id="navbar">
+    <div class="logo-container">
+      <a href="index.html" class="logo-container">
+        <img class="logo-img" src="assets/logo1.jpg" alt="Miroslav Šebesta Logo">
+        <div class="logo-text">
+          <span class="logo-title">M. Šebesta</span>
+          <span class="logo-subtitle">Umělecký truhlář</span>
+        </div>
+      </a>
+    </div>
+    <button class="mobile-menu-btn" aria-label="Otevřít menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
     <ul class="nav-links">
       <li><a href="index.html#about">O mně</a></li>
-      <li><a href="index.html#work">Práce</a></li>
-      <li><a href="index.html#služby">Služby</a></li>
-      <li><a href="eshop.html">E-shop</a></li>
+      <li><a href="index.html#work">Portfolio</a></li>
+      <li><a href="index.html#realizace">Realizace</a></li>
+      <li><a href="eshop.html" class="active">Katalog</a></li>
       <li><a href="index.html#kontakt">Kontakt</a></li>
     </ul>
   </nav>
 
-  <!-- Hero -->
-  <section class="hero">
-    <!-- Tree visualization -->
-    <div class="tree-viz">
-      <div class="ring"></div>
-      <div class="ring"></div>
-      <div class="ring"></div>
-      <div class="ring"></div>
-      <div class="ring"></div>
-      <div class="leaves"></div>
+  <!-- Hero Section -->
+  <section class="hero-section" style="padding-top: 140px; padding-bottom: 4rem; background: linear-gradient(180deg, var(--cream-warm) 0%, var(--cream) 100%);">
+    <div style="max-width: 1400px; margin: 0 auto; text-align: left; position: relative;">
+      <span class="section-label">Dílo a prodej</span>
+      <h1 style="font-size: clamp(2.5rem, 5vw, 4.2rem); margin-bottom: 1.5rem;">Katalog limitovaných děl</h1>
+      <p style="font-size: 1.15rem; color: var(--wood-medium); max-width: 700px; line-height: 1.8;">
+        Ručně vyráběný nábytek a solitéry z naší rodinné dílny v Dolních Dunajovicích. Každý kus vzniká s důrazem na maximální životnost a tesařskou čistotu. Vzhledem k náročnosti ruční práce vyrábíme pouze limitované série.
+      </p>
     </div>
-    
-    <h1>E-shop</h1>
-    <p>
-      Ručně vyráběné kousky z masivního dřeva. 
-      Každý výrobek je originál – proto jsou všechny kusy limitované.
-    </p>
   </section>
 
-  <!-- Products List -->
-  <section class="products">
-    
-    <!-- Product 1: Stoolička -->
-    <div class="product-item">
-      <img src="assets/work-5.jpg" alt="Dubová stolička">
-      <div class="product-info">
-        <p class="label">Nábytek</p>
-        <h2>Dubová stolička</h2>
-        <p class="description">
-          Minimalistická třínohá stolička z masivního dubu. 
-          Jednoduchá konstrukce s tradičními tesařskými spoji. 
-          Vhodná jako odkládací stolek nebo přídavné sedátko.
-        </p>
-        <p class="price">2 800 Kč</p>
-        <p class="details">Materiál: dub | Rozměry: ⌀35 × 45 cm | Limitka: 5 ks</p>
-        <a href="mailto:sebwood@email.cz?subject=Stolička - poptávka" class="cta">Objednat</a>
-      </div>
-    </div>
+  <!-- Main Catalog Area -->
+  <section style="padding-top: 2rem;">
+    <div class="catalog-layout">
+      
+      <!-- Sticky Sidebar Filters -->
+      <aside style="position: sticky; top: 120px; z-index: 10;">
+        <h4 style="font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--wood-light); margin-bottom: 1.5rem; font-weight: 500;">Kategorie</h4>
+        <div style="display: flex; flex-direction: column; gap: 0.8rem; text-align: left;">
+          
+          <button class="filter-btn active" data-category="all" style="background: none; border: none; cursor: pointer; text-align: left; font-family: 'Outfit', sans-serif; font-size: 0.95rem; letter-spacing: 0.05em; padding: 0.5rem 0; color: var(--wood-medium); border-bottom: 1px solid transparent; transition: var(--transition-fast); display: inline-block;">
+            Všechna díla
+          </button>
+          
+          <button class="filter-btn" data-category="stoly" style="background: none; border: none; cursor: pointer; text-align: left; font-family: 'Outfit', sans-serif; font-size: 0.95rem; letter-spacing: 0.05em; padding: 0.5rem 0; color: var(--wood-medium); border-bottom: 1px solid transparent; transition: var(--transition-fast); display: inline-block;">
+            Stoly z masivu
+          </button>
+          
+          <button class="filter-btn" data-category="knihovny" style="background: none; border: none; cursor: pointer; text-align: left; font-family: 'Outfit', sans-serif; font-size: 0.95rem; letter-spacing: 0.05em; padding: 0.5rem 0; color: var(--wood-medium); border-bottom: 1px solid transparent; transition: var(--transition-fast); display: inline-block;">
+            Knihovny
+          </button>
+          
+          <button class="filter-btn" data-category="lavicky" style="background: none; border: none; cursor: pointer; text-align: left; font-family: 'Outfit', sans-serif; font-size: 0.95rem; letter-spacing: 0.05em; padding: 0.5rem 0; color: var(--wood-medium); border-bottom: 1px solid transparent; transition: var(--transition-fast); display: inline-block;">
+            Lavičky a stoličky
+          </button>
+          
+          <button class="filter-btn" data-category="skrinky" style="background: none; border: none; cursor: pointer; text-align: left; font-family: 'Outfit', sans-serif; font-size: 0.95rem; letter-spacing: 0.05em; padding: 0.5rem 0; color: var(--wood-medium); border-bottom: 1px solid transparent; transition: var(--transition-fast); display: inline-block;">
+            Skříňky & solitéry
+          </button>
 
-    <!-- Product 2: Barový stolek -->
-    <div class="product-item">
-      <img src="assets/work-2.jpg" alt="Barový stolek">
-      <div class="product-info">
-        <p class="label">Nábytek</p>
-        <h2>Barový stolek</h2>
-        <p class="description">
-          Vysoký barový stolek s masivní centrální nohou. 
-          Stabilní křížová podstava. 
-          Ideální do kuchyně, jídelny nebo vináren.
-        </p>
-        <p class="price">5 900 Kč</p>
-        <p class="details">Materiál: dub | Výška: 105 cm | Limitka: 3 ks</p>
-        <a href="mailto:sebwood@email.cz?subject=Barový stolek - poptávka" class="cta">Objednat</a>
-      </div>
-    </div>
+        </div>
 
-    <!-- Product 3: Odkládací stolky C -->
-    <div class="product-item">
-      <img src="assets/work-1.jpg" alt="Odkládací stolky C">
-      <div class="product-info">
-        <p class="label">Nábytek</p>
-        <h2>Odkládací stolky C</h2>
-        <p class="description">
-          pár odkládacích stolků ve tvaru písmene C. 
-          Ručně vyrobené s rybinovými spoji jako dekorativním prvkem. 
-          Skvělé jako boční stolky k sedací soupravě.
-        </p>
-        <p class="price">4 500 Kč / pár</p>
-        <p class="details">Materiál: dub | Rozměry: 40 × 40 × 50 cm | Limitka: 2 páry</p>
-        <a href="mailto:sebwood@email.cz?subject=Stolky C - poptávka" class="cta">Objednat</a>
-      </div>
-    </div>
+        <!-- Inline CSS helper for filter buttons active state -->
+        <style>
+          .filter-btn {
+            outline: none;
+          }
+          .filter-btn:hover {
+            color: var(--wood-dark);
+            padding-left: 5px;
+          }
+          .filter-btn.active {
+            color: var(--wood-dark);
+            font-weight: 500;
+            border-bottom-color: var(--accent);
+          }
+        </style>
+      </aside>
 
-    <!-- Product 4: Venkovní stůl -->
-    <div class="product-item">
-      <img src="assets/work-4.jpg" alt="Venkovní stůl">
-      <div class="product-info">
-        <p class="label">Exteriér</p>
-        <h2>Venkovní stůl</h2>
-        <p class="description">
-          Robustní venkovní stůl z masivního dubu. 
-          Odolný vůči povětrnostním podmínkám. 
-          Ideální na terasu nebo zahradu.
-        </p>
-        <p class="price">8 900 Kč</p>
-        <p class="details">Materiál: dub | Rozměry: 160 × 80 × 75 cm | Limitka: 2 ks</p>
-        <a href="mailto:sebwood@email.cz?subject=Venkovní stůl - poptávka" class="cta">Objednat</a>
-      </div>
-    </div>
+      <!-- Products Grid -->
+      <main style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 3rem 2rem;">
+        
+        <!-- Product 1: Dubový jídelní stůl -->
+        <div class="product-item" data-category="stoly" style="display: flex; flex-direction: column; transition: var(--transition-smooth);">
+          <div class="image-swap-container">
+            <img class="img-main" src="assets/work-3.jpg" alt="Dubový jídelní stůl">
+            <img class="img-detail" src="assets/work-6.jpg" alt="Detail tesařského spoje jídelního stolu">
+          </div>
+          <div style="padding: 1.5rem 0 0; flex-grow: 1; display: flex; flex-direction: column;">
+            <span style="font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.5rem;">Stoly</span>
+            <h2 style="font-size: 1.6rem; font-weight: 400; margin-bottom: 0.8rem;">Dubový jídelní stůl</h2>
+            <p style="font-size: 0.95rem; color: var(--wood-medium); margin-bottom: 1rem; line-height: 1.6; flex-grow: 1;">
+              Robustní jídelní stůl z jednoho kusu dřeva. Tradiční tesařské spoje bez použití kovových prvků zaručují stabilitu na staletí a nechají vyniknout přirozenou divokost dubového masivu.
+            </p>
+            <p style="font-size: 0.85rem; color: var(--wood-light); margin-bottom: 0.8rem;">
+              <strong>Materiál:</strong> český dub | <strong>Rozměry:</strong> 200 × 90 × 76 cm
+            </p>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(28, 18, 12, 0.06); padding-top: 1.2rem; margin-top: 0.5rem;">
+              <span style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--wood-dark); font-weight: 500;">34 000 Kč</span>
+              <a href="mailto:sebwood@email.cz?subject=Poptávka: Jídelní stůl" class="btn-secondary" style="padding: 0.6rem 1.4rem; font-size: 0.7rem;">Objednat</a>
+            </div>
+          </div>
+        </div>
 
-    <!-- Product 5: Surfboard -->
-    <div class="product-item">
-      <img src="assets/work-8.jpg" alt="Surfboard">
-      <div class="product-info">
-        <p class="label">Design</p>
-        <h2>Surfboard</h2>
-        <p class="description">
-          Ručně vyrobený surfboard z masivního dřeva. 
-          Unikátní designový kousek – funkční a zároveň dekorativní. 
-          Skvělý jako nástěnná dekorace nebo designový prvek.
-        </p>
-        <p class="price">6 500 Kč</p>
-        <p class="details">Materiál: smrk/jasan | Délka: 210 cm | Limitka: 1 ks</p>
-        <a href="mailto:sebwood@email.cz?subject=Surfboard - poptávka" class="cta">Objednat</a>
-      </div>
-    </div>
+        <!-- Product 2: Barový stolek -->
+        <div class="product-item" data-category="stoly" style="display: flex; flex-direction: column; transition: var(--transition-smooth);">
+          <div class="image-swap-container">
+            <img class="img-main" src="assets/work-2.jpg" alt="Barový stolek z masivu">
+            <img class="img-detail" src="assets/work-6.jpg" alt="Detail barového stolku">
+          </div>
+          <div style="padding: 1.5rem 0 0; flex-grow: 1; display: flex; flex-direction: column;">
+            <span style="font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.5rem;">Stoly</span>
+            <h2 style="font-size: 1.6rem; font-weight: 400; margin-bottom: 0.8rem;">Barový stolek z masivu</h2>
+            <p style="font-size: 0.95rem; color: var(--wood-medium); margin-bottom: 1rem; line-height: 1.6; flex-grow: 1;">
+              Vysoký barový stolek s masivní centrální nohou a křížovou podstavou. Ideální do vinoték, kaváren i jako dominantní prvek moderní domácí kuchyně.
+            </p>
+            <p style="font-size: 0.85rem; color: var(--wood-light); margin-bottom: 0.8rem;">
+              <strong>Materiál:</strong> český dub | <strong>Rozměry:</strong> výška 105 cm, deska ⌀70 cm
+            </p>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(28, 18, 12, 0.06); padding-top: 1.2rem; margin-top: 0.5rem;">
+              <span style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--wood-dark); font-weight: 500;">5 900 Kč</span>
+              <a href="mailto:sebwood@email.cz?subject=Poptávka: Barový stolek" class="btn-secondary" style="padding: 0.6rem 1.4rem; font-size: 0.7rem;">Objednat</a>
+            </div>
+          </div>
+        </div>
 
+        <!-- Product 3: Odkládací stolky C -->
+        <div class="product-item" data-category="stoly" style="display: flex; flex-direction: column; transition: var(--transition-smooth);">
+          <div class="image-swap-container">
+            <img class="img-main" src="assets/work-1.jpg" alt="Odkládací stolky C">
+            <img class="img-detail" src="assets/work-6.jpg" alt="Detail rybinových spojů stolků">
+          </div>
+          <div style="padding: 1.5rem 0 0; flex-grow: 1; display: flex; flex-direction: column;">
+            <span style="font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.5rem;">Stoly</span>
+            <h2 style="font-size: 1.6rem; font-weight: 400; margin-bottom: 0.8rem;">Odkládací stolky C</h2>
+            <p style="font-size: 0.95rem; color: var(--wood-medium); margin-bottom: 1rem; line-height: 1.6; flex-grow: 1;">
+              Pár designových stolků ve tvaru písmene C. Rybinové rohové spoje plní konstrukční i dekorativní roli. Skvělé jako boční stolky k pohovce.
+            </p>
+            <p style="font-size: 0.85rem; color: var(--wood-light); margin-bottom: 0.8rem;">
+              <strong>Materiál:</strong> český dub | <strong>Rozměry:</strong> 40 × 40 × 50 cm
+            </p>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(28, 18, 12, 0.06); padding-top: 1.2rem; margin-top: 0.5rem;">
+              <span style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--wood-dark); font-weight: 500;">4 500 Kč <small style="font-size: 0.9rem;">/ pár</small></span>
+              <a href="mailto:sebwood@email.cz?subject=Poptávka: Stolky C" class="btn-secondary" style="padding: 0.6rem 1.4rem; font-size: 0.7rem;">Objednat</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 4: Robustní venkovní stůl -->
+        <div class="product-item" data-category="stoly" style="display: flex; flex-direction: column; transition: var(--transition-smooth);">
+          <div class="image-swap-container">
+            <img class="img-main" src="assets/work-4.jpg" alt="Robustní venkovní stůl">
+            <img class="img-detail" src="assets/work-6.jpg" alt="Detail venkovního stolu">
+          </div>
+          <div style="padding: 1.5rem 0 0; flex-grow: 1; display: flex; flex-direction: column;">
+            <span style="font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.5rem;">Stoly</span>
+            <h2 style="font-size: 1.6rem; font-weight: 400; margin-bottom: 0.8rem;">Robustní venkovní stůl</h2>
+            <p style="font-size: 0.95rem; color: var(--wood-medium); margin-bottom: 1rem; line-height: 1.6; flex-grow: 1;">
+              Masivní zahradní stůl odolný vůči povětrnostním vlivům. Ošetřen hloubkovými přírodními oleji s voskem. Perfektní pro letní setkání na terase.
+            </p>
+            <p style="font-size: 0.85rem; color: var(--wood-light); margin-bottom: 0.8rem;">
+              <strong>Materiál:</strong> český dub | <strong>Rozměry:</strong> 160 × 80 × 75 cm
+            </p>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(28, 18, 12, 0.06); padding-top: 1.2rem; margin-top: 0.5rem;">
+              <span style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--wood-dark); font-weight: 500;">8 900 Kč</span>
+              <a href="mailto:sebwood@email.cz?subject=Poptávka: Venkovní stůl" class="btn-secondary" style="padding: 0.6rem 1.4rem; font-size: 0.7rem;">Objednat</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 5: Jasanová knihovna na míru -->
+        <div class="product-item" data-category="knihovny" style="display: flex; flex-direction: column; transition: var(--transition-smooth);">
+          <div class="image-swap-container">
+            <img class="img-main" src="assets/work-9.jpg" alt="Jasanová knihovna">
+            <img class="img-detail" src="assets/work-4.jpg" alt="Detail dřeva jasanu">
+          </div>
+          <div style="padding: 1.5rem 0 0; flex-grow: 1; display: flex; flex-direction: column;">
+            <span style="font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.5rem;">Knihovny</span>
+            <h2 style="font-size: 1.6rem; font-weight: 400; margin-bottom: 0.8rem;">Jasanová knihovna na míru</h2>
+            <p style="font-size: 0.95rem; color: var(--wood-medium); margin-bottom: 1rem; line-height: 1.6; flex-grow: 1;">
+              Velkorysá vzdušná knihovna z masivního českého jasanu. Tradiční čepování a posuvné police, které se přizpůsobí velikosti vaší literatury.
+            </p>
+            <p style="font-size: 0.85rem; color: var(--wood-light); margin-bottom: 0.8rem;">
+              <strong>Materiál:</strong> český jasan | <strong>Rozměry:</strong> 180 × 35 × 200 cm
+            </p>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(28, 18, 12, 0.06); padding-top: 1.2rem; margin-top: 0.5rem;">
+              <span style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--wood-dark); font-weight: 500;">18 500 Kč</span>
+              <a href="mailto:sebwood@email.cz?subject=Poptávka: Knihovna" class="btn-secondary" style="padding: 0.6rem 1.4rem; font-size: 0.7rem;">Objednat</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 6: Dubová stolička -->
+        <div class="product-item" data-category="lavicky" style="display: flex; flex-direction: column; transition: var(--transition-smooth);">
+          <div class="image-swap-container">
+            <img class="img-main" src="assets/work-5.jpg" alt="Dubová stolička">
+            <img class="img-detail" src="assets/work-7.jpg" alt="Detail čepu stoličky">
+          </div>
+          <div style="padding: 1.5rem 0 0; flex-grow: 1; display: flex; flex-direction: column;">
+            <span style="font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.5rem;">Lavičky a stoličky</span>
+            <h2 style="font-size: 1.6rem; font-weight: 400; margin-bottom: 0.8rem;">Dubová stolička</h2>
+            <p style="font-size: 0.95rem; color: var(--wood-medium); margin-bottom: 1rem; line-height: 1.6; flex-grow: 1;">
+              Minimalistická třínohá stolička z masivu s klínovanými spoji, které procházejí skrz sedák a jsou jištěny kontrastními dřevěnými klíny.
+            </p>
+            <p style="font-size: 0.85rem; color: var(--wood-light); margin-bottom: 0.8rem;">
+              <strong>Materiál:</strong> český dub | <strong>Rozměry:</strong> ⌀35 × 45 cm
+            </p>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(28, 18, 12, 0.06); padding-top: 1.2rem; margin-top: 0.5rem;">
+              <span style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--wood-dark); font-weight: 500;">2 800 Kč</span>
+              <a href="mailto:sebwood@email.cz?subject=Poptávka: Stolička" class="btn-secondary" style="padding: 0.6rem 1.4rem; font-size: 0.7rem;">Objednat</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 7: Komoda / Skříňka s čepy -->
+        <div class="product-item" data-category="skrinky" style="display: flex; flex-direction: column; transition: var(--transition-smooth);">
+          <div class="image-swap-container">
+            <img class="img-main" src="assets/work-6.jpg" alt="Komoda s čepy">
+            <img class="img-detail" src="assets/work-7.jpg" alt="Detail čepovaných spojů komody">
+          </div>
+          <div style="padding: 1.5rem 0 0; flex-grow: 1; display: flex; flex-direction: column;">
+            <span style="font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.5rem;">Skříňky & solitéry</span>
+            <h2 style="font-size: 1.6rem; font-weight: 400; margin-bottom: 0.8rem;">Komoda / Skříňka s čepy</h2>
+            <p style="font-size: 0.95rem; color: var(--wood-medium); margin-bottom: 1rem; line-height: 1.6; flex-grow: 1;">
+              Skříňka s tesařskými detaily, které oslavují čistotu spojení dřeva na dřevo. Ručně broušená a napuštěná olejem z lněného semínka.
+            </p>
+            <p style="font-size: 0.85rem; color: var(--wood-light); margin-bottom: 0.8rem;">
+              <strong>Materiál:</strong> český dub | <strong>Rozměry:</strong> 80 × 40 × 75 cm
+            </p>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(28, 18, 12, 0.06); padding-top: 1.2rem; margin-top: 0.5rem;">
+              <span style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--wood-dark); font-weight: 500;">12 500 Kč</span>
+              <a href="mailto:sebwood@email.cz?subject=Poptávka: Skříňka s čepy" class="btn-secondary" style="padding: 0.6rem 1.4rem; font-size: 0.7rem;">Objednat</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 8: Dřevěný surfboard -->
+        <div class="product-item" data-category="skrinky" style="display: flex; flex-direction: column; transition: var(--transition-smooth);">
+          <div class="image-swap-container">
+            <img class="img-main" src="assets/work-8.jpg" alt="Dřevěný surfboard">
+            <img class="img-detail" src="assets/work-4.jpg" alt="Detail povrchu dřevěného surfboardu">
+          </div>
+          <div style="padding: 1.5rem 0 0; flex-grow: 1; display: flex; flex-direction: column;">
+            <span style="font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.5rem;">Skříňky & solitéry</span>
+            <h2 style="font-size: 1.6rem; font-weight: 400; margin-bottom: 0.8rem;">Dřevěný surfboard</h2>
+            <p style="font-size: 0.95rem; color: var(--wood-medium); margin-bottom: 1rem; line-height: 1.6; flex-grow: 1;">
+              Autorský dekorativní a plně funkční surfboard z masivního českého smrku a jasanu. Exkluzivní interiérový solitér, který vdechne prostoru unikátní styl.
+            </p>
+            <p style="font-size: 0.85rem; color: var(--wood-light); margin-bottom: 0.8rem;">
+              <strong>Materiál:</strong> smrk / jasan | <strong>Rozměry:</strong> délka 210 × 50 cm
+            </p>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(28, 18, 12, 0.06); padding-top: 1.2rem; margin-top: 0.5rem;">
+              <span style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--wood-dark); font-weight: 500;">6 500 Kč</span>
+              <a href="mailto:sebwood@email.cz?subject=Poptávka: Dřevěný surfboard" class="btn-secondary" style="padding: 0.6rem 1.4rem; font-size: 0.7rem;">Objednat</a>
+            </div>
+          </div>
+        </div>
+
+      </main>
+
+    </div>
   </section>
+
+  <!-- Landscape transition to footer -->
+  <svg class="footer-transition-svg" viewBox="0 0 1440 200" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display: block; width: 100%; height: 120px; margin-top: -120px; margin-bottom: -1px; background: transparent; position: relative; z-index: 5; pointer-events: none;">
+    <!-- Ground line (flat/straight, filled below) -->
+    <path d="M0,200 L0,150 L1440,150 L1440,200 Z" fill="var(--wood-dark)" />
+    
+    <!-- Stylized Oak Tree (with realistic branches and organic leaf clusters) -->
+    <g fill="var(--wood-dark)">
+      <!-- Trunk & main branches -->
+      <path d="M1143,150 C1144,135 1141,120 1136,110 C1131,100 1121,90 1113,85 L1116,81 C1126,87 1135,97 1140,107 C1144,100 1148,90 1150,75 L1154,75 C1152,90 1148,101 1144,109 C1149,115 1153,123 1156,129 C1160,121 1166,110 1173,103 L1176,106 C1169,113 1163,123 1160,132 C1163,138 1165,145 1167,150 Z" />
+      
+      <!-- Foliage clusters (grouped to render organic silhouette of a solitary oak) -->
+      <circle cx="1110" cy="77" r="22" />
+      <circle cx="1148" cy="65" r="28" />
+      <circle cx="1175" cy="90" r="18" />
+      <circle cx="1128" cy="47" r="24" />
+      <circle cx="1164" cy="50" r="22" />
+      <circle cx="1140" cy="85" r="15" />
+      <circle cx="1158" cy="80" r="15" />
+    </g>
+  </svg>
 
   <!-- Footer -->
   <footer>
-    <p>© 2026 Miroslav Šebesta. Všechna práva vyhrazena.</p>
-    <div class="social-links">
-      <a href="https://www.instagram.com/mir_sebwood/" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <rect x="2" y="2" width="20" height="20" rx="5"/>
-          <circle cx="12" cy="12" r="4"/>
-          <circle cx="18" cy="6" r="1" fill="currentColor"/>
-        </svg>
-      </a>
-      <a href="https://www.facebook.com/mirek.sebesta.39/" target="_blank" rel="noopener" aria-label="Facebook">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4H10V7a1 1 0 0 1 1-1h3V2z"/>
-        </svg>
-      </a>
+    <!-- Concentric wood grain / rings watermark -->
+    <svg class="footer-watermark" viewBox="0 0 200 200" fill="none" stroke="currentColor">
+      <circle cx="100" cy="100" r="10" stroke-dasharray="1 2" />
+      <circle cx="100" cy="100" r="25" stroke-dasharray="2 3" />
+      <circle cx="100" cy="100" r="45" stroke-dasharray="2 4" />
+      <circle cx="100" cy="100" r="70" stroke-dasharray="1 3" />
+      <circle cx="100" cy="100" r="95" stroke-dasharray="2 5" />
+      <circle cx="100" cy="100" r="125" stroke-dasharray="1 4" />
+      <path d="M100 100 L110 120 L105 145 L115 175 M100 100 L90 85 L95 60 L85 25" stroke-dasharray="1 1" />
+    </svg>
+
+    <div class="footer-content">
+      <!-- Brand column -->
+      <div class="footer-brand">
+        <h3>M. Šebesta</h3>
+        <p>
+          Výroba luxusního nábytku z masivu tradiční ruční prací ve Slavkově u Brna a Dolních Dunajovicích. Spojení nadčasového designu a nekompromisní trvanlivosti.
+        </p>
+      </div>
+      <!-- Links column -->
+      <div>
+        <h4 class="footer-heading">Navigace</h4>
+        <ul class="footer-links">
+          <li><a href="index.html#about">O mně</a></li>
+          <li><a href="index.html#work">Portfolio</a></li>
+          <li><a href="index.html#realizace">Realizace</a></li>
+          <li><a href="eshop.html">Katalog / E-shop</a></li>
+          <li><a href="index.html#kontakt">Kontakt</a></li>
+        </ul>
+      </div>
+      <!-- Socials column -->
+      <div>
+        <h4 class="footer-heading">Sledujte tvorbu</h4>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/mir_sebwood/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg style="width: 24px; height: 24px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="2" width="20" height="20" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="18" cy="6" r="1" fill="currentColor"/>
+            </svg>
+          </a>
+          <a href="https://www.facebook.com/mirek.sebesta.39/" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg style="width: 24px; height: 24px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4H10V7a1 1 0 0 1 1-1h3V2z"/>
+            </svg>
+          </a>
+        </div>
+        <p style="margin-top: 1.5rem; font-size: 0.85rem; line-height: 1.5;">
+          Přijďte se podívat na proces výroby na sociálních sítích.
+        </p>
+      </div>
+    </div>
+
+    <!-- Bottom copyrights -->
+    <div class="footer-bottom">
+      <p>© 2026 Miroslav Šebesta. Všechna práva vyhrazena. | Web navržen s úctou k řemeslu.</p>
+      <p>IČO: 12345678 (Předváděcí verze)</p>
     </div>
   </footer>
+
+  <!-- Scripts -->
+  <script src="main.js"></script>
 </body>
 </html>
